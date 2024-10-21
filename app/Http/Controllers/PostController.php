@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SavePostRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Post;
@@ -20,16 +21,11 @@ class PostController extends Controller
 
     /** 
      * Create a Post
-     * @param Request $request
-     * 
+     * @param SavePostRequest $request the incomming request
+     * @return JsonResponse the response result
      */
-    function create(Request $request): JsonResponse
+    function create(SavePostRequest $request): JsonResponse
     {
-        $request->validate([
-            'title' => 'string:required',
-            'content' => 'string:required'
-        ]);
-
         $post = new Post([
             'title' => $request->title,
             'content' => $request->content,
@@ -40,6 +36,38 @@ class PostController extends Controller
 
         return new JsonResponse([
             'post' => $post->id
+        ]);
+    }
+
+    /** 
+     * Update a post
+     * @param Post $post the post
+     * @param SavePostRequest $request the incomming request
+     * @return JsonResponse response
+     */
+    function update(Post $post, SavePostRequest $request): JsonResponse
+    {
+        $post->update([
+            'title' => $request->title,
+            'content' => $request->content
+        ]);
+
+        $post->save();
+
+        return new JsonResponse([
+            'post' => $post->id
+        ]);
+    }
+
+    /**
+     * Delete a post
+     * @param Post $post the post
+     * @return JsonResponse the status response 
+     */
+    function delete(Post $post): JsonResponse
+    {
+        return new JsonResponse([
+            'success' => $post->delete()
         ]);
     }
 }
