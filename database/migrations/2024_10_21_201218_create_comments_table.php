@@ -22,7 +22,7 @@ return new class extends Migration
             $table->boolean('is_approved');
 
             $table->primary('id');
-            $table->foreign('post_id')->references('id')->on('posts');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

@@ -20,8 +20,8 @@ class CommentFactory extends Factory
     {
         return [
             'content' => fake()->text(50),
-            'user_id' => User::factory()->create(),
-            'post_id' => Post::factory()->create(),
+            'user_id' => User::factory(),
+            'post_id' => Post::factory(),
             'is_approved' => false,
         ];
     }
