@@ -17,6 +17,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Comments Controller
     Route::controller(CommentController::class)->group(function () {
-        Route::post('/posts/{post}/comment', 'create')->name('posts.comment.create');
+        Route::get('/posts/{post}/comments', 'index')->name('posts.comments');
+
+        Route::post('/posts/{post}/comments', 'create')->name('posts.comment.create');
+
+        Route::post('/comments/{comment}/approve', 'approve')->name('comments.approve');
     });
 });
