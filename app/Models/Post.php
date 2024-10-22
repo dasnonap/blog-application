@@ -20,11 +20,21 @@ class Post extends Model
 
     function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * Check if external User is the author of the comment
+     * @param User $user external user
+     * @return bool 
+     */
+    function isUserTheAuthor(User $user): bool
+    {
+        return $user->id === $this->user_id;
     }
 }

@@ -22,5 +22,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/posts/{post}/comments', 'create')->name('posts.comment.create');
 
         Route::post('/comments/{comment}/approve', 'approve')->name('comments.approve');
+
+        Route::post('/comments/{comment}/delete', 'delete')->name('comments.delete');
     });
 });
