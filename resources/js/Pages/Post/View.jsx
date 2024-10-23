@@ -1,8 +1,9 @@
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import PostContent from "./Partials/PostContent";
 import PostComments from "./Partials/PostComments";
 import MenuLayout from "@/Layouts/MenuLayout";
 import PostMeta from "./Partials/PostMeta";
+import CommentForm from "./Partials/CommentForm";
 
 export default function View({post, user}){
     return (
@@ -30,11 +31,27 @@ export default function View({post, user}){
                         </div>
                     </div>
 
-                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg mb-6">
                         <div className="p-6 text-gray-900">
                             <PostComments 
                                 post={post}
                             />
+                        </div>
+                    </div>
+
+                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                        <div className="p-6 text-gray-900">
+                         {user ? 
+                            <CommentForm 
+                                post={post}
+                            />
+                            : 
+                            <div>
+                                <Link href={route('login')}>
+                                    Login to Comment
+                                </Link>
+                            </div> 
+                        }
                         </div>
                     </div>
                 </div>

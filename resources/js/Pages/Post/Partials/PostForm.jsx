@@ -99,11 +99,6 @@ export default function PostForm({}){
                         type="text"
                         className="mt-1 block w-full"
                     />
-
-                    <InputError
-                        message={errors.title}
-                        className="mt-2"
-                    />
                 </div>
 
                 <div>
@@ -129,11 +124,6 @@ export default function PostForm({}){
                             )
                             })
                         ]}
-                    />
-
-                    <InputError
-                        message={errors.content}
-                        className="mt-2"
                     />
                 </div>
                 

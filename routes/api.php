@@ -4,8 +4,10 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->group(function () {
+// Posts Open Controller
+Route::get('/posts/{post}/comments', [PostController::class, 'comments'])->name('posts.comments');
 
+Route::middleware('auth:sanctum')->group(function () {
     // Posts Controller
     Route::controller(PostController::class)->group(function () {
         Route::post('/posts/create', 'create')->name('posts.create');
@@ -17,8 +19,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Comments Controller
     Route::controller(CommentController::class)->group(function () {
-        Route::get('/posts/{post}/comments', 'index')->name('posts.comments');
-
         Route::post('/posts/{post}/comments', 'create')->name('posts.comment.create');
 
         Route::post('/comments/{comment}/approve', 'approve')->name('comments.approve');

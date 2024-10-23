@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SavePostRequest;
+use App\Http\Resources\CommentResource;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -67,6 +69,23 @@ class PostController extends Controller
     {
         return new JsonResponse([
             'success' => $post->delete()
+        ]);
+    }
+
+    /**
+     * Get Post Comments
+     * @param Post $post
+     * @param Request $request
+     * @return JsonResponse 
+     */
+    function comments(Post $post, Request $request): JsonResponse
+    {
+        $commentsCollection = CommentResource::collection(
+            $post->comments()->where('is_approved', true)->get()
+        )->toArray($request);
+
+        return new JsonResponse([
+            'comments' => $commentsCollection
         ]);
     }
 }
