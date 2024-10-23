@@ -19,17 +19,22 @@ export default function CommentsListing({post}){
 
     return (
         <div>
-            {isLoading ? 'Fetching Comments...' :
-                data.comments ? data.comments.map((comment) => {
-                    return (
-                        <Comment 
+            <h4>Comments</h4>
+
+            <div className="grid grid-cols-4 gap-4">
+                {isLoading ? 'Fetching Comments...' :
+                    data.data.comments ? data.data.comments.map((comment) => {
+                        return (
+                            <Comment 
                             comment={comment} 
                             key={Math.random().toString()}
-                        />
-                    )
-                })
-                : 'No comments yet!'
-            }
+                            previewOnly={true}
+                            />
+                        )
+                    })
+                    : 'No comments yet!'
+                }
+            </div>
         </div>
     );
 }
