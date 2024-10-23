@@ -21,7 +21,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-
     // Profile Controller
     Route::controller(ProfileController::class)->group(function () {
         Route::get('/profile', 'edit')->name('profile.edit');
@@ -33,11 +32,11 @@ Route::middleware('auth')->group(function () {
     Route::controller(CreatePostController::class)->group(function () {
         Route::get('/posts/create', 'create')->name('posts.create.page');
     });
+});
 
-    // View Post Controller
-    Route::controller(ViewPostController::class)->group(function () {
-        Route::get('/posts/{post}', 'view')->name('posts.view');
-    });
+// View Post Controller
+Route::controller(ViewPostController::class)->group(function () {
+    Route::get('/posts/{post}', 'view')->name('posts.view');
 });
 
 require __DIR__ . '/auth.php';

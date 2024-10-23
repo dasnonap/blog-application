@@ -13,7 +13,8 @@ class ViewPostController extends Controller
     function view(Post $post, Request $request): Response
     {
         return Inertia::render('Post/View', [
-            'post' => (new PostResource($post))->toArray($request)
+            'post' => (new PostResource($post))->toArray($request),
+            'user' => $request->user()
         ]);
     }
 }
