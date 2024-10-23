@@ -1,6 +1,6 @@
 import InputLabel from "@/Components/InputLabel"
 import TextInput from "@/Components/TextInput";
-import { useForm } from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 import { useRef, useState } from "react";
 import { MDXEditor, UndoRedo, BoldItalicUnderlineToggles, toolbarPlugin } from '@mdxeditor/editor'
 import PrimaryButton from "@/Components/PrimaryButton";
@@ -12,6 +12,7 @@ export default function PostForm({}){
     const titleInput = useRef();
     const contentInput = useRef();
     const [formErrors, setFormErrors] = useState();
+    const [pubslishedPost, setPubslishedPost] = useState();
 
     const {
         data, 
@@ -57,17 +58,16 @@ export default function PostForm({}){
                 'Accept': 'application/json',
             },
         })
-        .then(() => {
+        .then(({data}) => {
             reset();
-            contentInput.setMarkdown("");
+            setFormErrors('');
+            setPubslishedPost(data.post);
         })
         .catch((error) => {
             if (error.response) {
                 setFormErrors(error.response.data.message);
             } else if (error.request) {
                 setFormErrors(error.request);
-            } else {
-                setFormErrors('Error', error.message);
             }
         });
     }
@@ -139,6 +139,14 @@ export default function PostForm({}){
                 
                 <div className="flex items-center gap-4">
                     <PrimaryButton disabled={processing}>Save</PrimaryButton>
+
+                    {pubslishedPost ? 
+                        <Link href={route('posts.view', {
+                            'post' : pubslishedPost
+                        })}>
+                            View
+                        </Link>
+                    : ''}
                 </div>
             </form>
         </section>

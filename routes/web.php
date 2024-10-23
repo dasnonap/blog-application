@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CreatePostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ViewPostController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,9 +29,14 @@ Route::middleware('auth')->group(function () {
         Route::delete('/profile', 'destroy')->name('profile.destroy');
     });
 
-    // Post Controller
+    // Create Post Controller
     Route::controller(CreatePostController::class)->group(function () {
         Route::get('/posts/create', 'create')->name('posts.create.page');
+    });
+
+    // View Post Controller
+    Route::controller(ViewPostController::class)->group(function () {
+        Route::get('/posts/{post}', 'view')->name('posts.view');
     });
 });
 
