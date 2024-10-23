@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
@@ -24,5 +25,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/comments/{comment}/approve', 'approve')->name('comments.approve');
 
         Route::post('/comments/{comment}/delete', 'delete')->name('comments.delete');
+    });
+
+    // Author Controller
+    Route::controller(AuthorController::class)->group(function () {
+        Route::get('/user/comments', 'index')->name('user.comments');
     });
 });

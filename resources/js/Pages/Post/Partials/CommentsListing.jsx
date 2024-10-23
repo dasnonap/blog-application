@@ -6,7 +6,6 @@ export default function CommentsListing({post}){
     const queryClient = useQueryClient();
     const postId = post.id;
     
-
     const fetchPostComments = async () => {
         return await axios.get(route('posts.comments',{
             post: postId
