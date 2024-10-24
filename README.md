@@ -1,7 +1,3 @@
-Here's a draft for the README of your blog application:
-
----
-
 # Blog Application
 
 This project is a blog application built on top of the Laravel Breeze base theme. It includes essential blog features such as creating posts, commenting on posts, and author-controlled comment approval. Unauthenticated users can browse posts, but only authenticated users can create posts and comment.
@@ -139,7 +135,3 @@ Ensure that you have the following installed:
 ## Conclusion
 
 This blog application extends the basic Laravel Breeze setup with additional features like post creation, comment submission, and author-driven comment moderation. With Laravel Sail, it's easy to get the project up and running using Docker.
-
---- 
-
-Feel free to modify the placeholders (e.g., repository link) based on your actual setup!
