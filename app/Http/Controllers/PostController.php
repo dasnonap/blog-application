@@ -17,7 +17,7 @@ class PostController extends Controller
      */
     function index(Request $request): JsonResponse
     {
-        $posts = Post::orderBy('created_at', 'desc')->paginate(10);
+        $posts = Post::orderBy('created_at', 'desc')->paginate(12);
 
         return new JsonResponse(
             (new PostCollection($posts))->toArray($request)
