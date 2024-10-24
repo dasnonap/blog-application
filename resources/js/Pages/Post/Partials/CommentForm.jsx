@@ -18,9 +18,29 @@ export default function CommentForm({post}){
         content: ''
     });
 
+    const isFormValid = () => {
+        let errors = '';
+
+        Object.keys(data).map((key) => {
+            if (data[key].length == 0) {
+                errors += `The ${key} field is required\n`;
+            }
+        });
+
+        if (errors.length > 0) {
+            setFormErrors(errors);
+        }
+
+        return errors.length == 0;
+    }
+
     const handleCommentSubmit = (event) => {
         event.preventDefault();
 
+        if (! isFormValid()) {
+            return;
+        }
+        
         axios({
             method: 'post',
             url: route('posts.comment.create', {

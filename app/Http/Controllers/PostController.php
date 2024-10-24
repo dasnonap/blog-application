@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SavePostRequest;
 use App\Http\Resources\CommentResource;
+use App\Http\Resources\PostCollection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Post;
@@ -14,10 +15,13 @@ class PostController extends Controller
      * Get all Posts
      * @return JsonResponse 
      */
-    function index(): JsonResponse
+    function index(Request $request): JsonResponse
     {
+        $posts = Post::orderBy('created_at', 'desc')->paginate(10);
 
-        return new JsonResponse([]);
+        return new JsonResponse(
+            (new PostCollection($posts))->toArray($request)
+        );
     }
 
     /** 

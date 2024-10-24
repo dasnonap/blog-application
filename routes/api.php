@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 // Posts Open Controller
 Route::get('/posts/{post}/comments', [PostController::class, 'comments'])->name('posts.comments');
 
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+
 Route::middleware('auth:sanctum')->group(function () {
     // Posts Controller
     Route::controller(PostController::class)->group(function () {
